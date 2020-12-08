@@ -8,7 +8,7 @@ public class Cocinero implements Runnable{
     @Override
     public void run() {
         while(true){
-            restaurant.Cocinar();
+            restaurant.cocinar();
         }
     }
 }

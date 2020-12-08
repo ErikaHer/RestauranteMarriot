@@ -1,111 +1,33 @@
 package Model;
 
 import javafx.application.Platform;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
-import java.net.URL;
-import java.util.Observable;
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
-
-public class Cliente extends Observable implements Runnable{
-    private AnchorPane padre;
+public class Cliente implements Runnable{
+    private AnchorPane anchor;
     private Restaurant restaurant;
-    public Cliente(AnchorPane padre, Restaurant restaurant){
-        this.padre=padre;
+    private static String[] positions;
+    public Cliente(AnchorPane anchor, Restaurant restaurant){
+        this.anchor = anchor;
         this.restaurant=restaurant;
+        positions = new String[5];
+        positions[0] = "533 65";
+        positions[1] = "781 65";
+        positions[2] = "533 243";
+        positions[3] = "533 430";
+        positions[4] = "781 430";
     }
     @Override
     public void run() {
-        this.setChanged();
-        this.notifyObservers("new");
-        try {
-            Thread.sleep(ThreadLocalRandom.current().nextInt(1500) + 1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        boolean reserva = restaurant.Reservar(Thread.currentThread().getName());
-        String argumento;
-        if(reserva) {
-            argumento = "cR";
-        }
-        else {
-            argumento = "sR";
-        }
-        this.setChanged();
-        this.notifyObservers("access " + argumento);
-        try {
-            Thread.sleep(ThreadLocalRandom.current().nextInt(1500) + 1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        /*String url="/Imagenes/Cliente"+ThreadLocalRandom.current().nextInt(4)+".png";
-        System.out.println("Inicio de cliente: "+url);
-        Button cliente = new Button("");
-        cliente.setLayoutX(600);
-        cliente.setLayoutY(500);
-        URL link= getClass().getResource(url);
-        Image imagen= new Image(link.toString(),50,60,false,true);
-        cliente.setGraphic((new ImageView(imagen)));
-        Platform.runLater(()-> this.padre.getChildren().add(cliente));
-        for(int i=0;i<10;i++){
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            Platform.runLater(()-> cliente.setLayoutY(cliente.getLayoutY()-50));
-        }*/
-        /*for(int i=0;i<8;i++){
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            Platform.runLater(()-> cliente.setLayoutX(cliente.getLayoutX()-25));
-        }
-        for(int i=0;i<6;i++){
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            Platform.runLater(()-> cliente.setLayoutY(cliente.getLayoutY()+50));
-        }
-        for(int i=0;i<5;i++){
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            Platform.runLater(()-> cliente.setLayoutX(cliente.getLayoutX()-50));
-        }*/
-        int numMesa = restaurant.Entrar(Thread.currentThread().getName());
-        this.setChanged();
-        this.notifyObservers("seat " + numMesa);
-        /*for(int i=0;i<5;i++){
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            Platform.runLater(()-> cliente.setLayoutY(cliente.getLayoutY()-25));
-        }*/
-        restaurant.Ordenar();
-        restaurant.comerCliente();
-        //restaurant.salirCliente();
-        /*for(int i=0;i<2;i++){
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            Platform.runLater(()-> cliente.setLayoutY(cliente.getLayoutY()+50));
-        }
+        Circle cliente = new Circle(15, Color.rgb(180, 140, 140));
+        Platform.runLater(() -> {
+            cliente.setLayoutX(24);
+            cliente.setLayoutY(340);
+            anchor.getChildren().add(cliente);
+        });
+        //Avanzar
         for(int i=0;i<5;i++){
             try {
                 Thread.sleep(500);
@@ -114,14 +36,116 @@ public class Cliente extends Observable implements Runnable{
             }
             Platform.runLater(()-> cliente.setLayoutX(cliente.getLayoutX()+50));
         }
-        for(int i=0;i<3;i++){
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            Platform.runLater(()-> cliente.setLayoutY(cliente.getLayoutY()+50));
+        boolean reservation = restaurant.reservar(Thread.currentThread().getName());
+        if(reservation) {
+            Platform.runLater(()-> cliente.setFill(Color.rgb(180, 140, 179)));
         }
-        Platform.runLater(()-> cliente.setVisible(false));*/
+        else {
+            Platform.runLater(()-> cliente.setFill(Color.rgb(180, 140, 140)));
+        }
+        //Entrar
+        int numMesa = restaurant.entrar(Thread.currentThread().getName());
+        String[] layout = positions[numMesa].split(" ");
+        Platform.runLater(()-> {
+            cliente.setLayoutX(Integer.parseInt(layout[0]));
+            cliente.setLayoutY(Integer.parseInt(layout[1])+50);
+        });
+        //Ordenar
+        restaurant.ordenar();
+
+        //Comer
+        restaurant.comer();
+
+        //Salir
+        restaurant.salir(numMesa);
+        if(numMesa == 0 || numMesa == 2 || numMesa == 3 ) {
+            switch (numMesa) {
+                case 0: //mesa1
+                    for(int i=0;i<2;i++){
+                        try {
+                            Thread.sleep(500);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        Platform.runLater(()-> cliente.setLayoutX(cliente.getLayoutX()+90));
+                    }
+                    for(int i=0;i<5;i++){
+                        try {
+                            Thread.sleep(500);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        Platform.runLater(()-> cliente.setLayoutY(cliente.getLayoutY()+120));
+                    }
+                    break;
+                case 2://mesa3
+                    for(int i=0;i<2;i++){
+                        try {
+                            Thread.sleep(500);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        Platform.runLater(()-> cliente.setLayoutX(cliente.getLayoutX()+90));
+                    }
+                    for(int i=0;i<4;i++){
+                        try {
+                            Thread.sleep(500);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        Platform.runLater(()-> cliente.setLayoutY(cliente.getLayoutY()+120));
+                    }
+                    break;
+                case 3://mesa4
+                    for(int i=0;i<3;i++){
+                        try {
+                            Thread.sleep(500);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        Platform.runLater(()-> cliente.setLayoutX(cliente.getLayoutX()+90));
+                    }
+                    Platform.runLater(()-> cliente.setLayoutY(cliente.getLayoutY()+120));
+                    break;
+            }
+        }
+        else {
+            switch (numMesa) {
+                case 1://mesa2
+                    for(int i=0;i<2;i++){
+                        try {
+                            Thread.sleep(500);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        Platform.runLater(()-> cliente.setLayoutX(cliente.getLayoutX()-20));
+                    }
+                    for(int i=0;i<5;i++){
+                        try {
+                            Thread.sleep(500);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        Platform.runLater(()-> cliente.setLayoutY(cliente.getLayoutY()+120));
+                    }
+                    break;
+                case 4://mesa5
+                    Platform.runLater(()-> cliente.setLayoutX(cliente.getLayoutX()-50));
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    for(int i=0;i<3;i++){
+                        try {
+                            Thread.sleep(500);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        Platform.runLater(()-> cliente.setLayoutY(cliente.getLayoutY()+80));
+                    }
+                    break;
+            }
+        }
     }
 }

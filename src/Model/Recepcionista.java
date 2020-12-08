@@ -13,8 +13,7 @@ private Restaurant restaurant;
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println("R");
-            restaurant.Recepcion();
+            restaurant.recepcion();
 
         }
     }
