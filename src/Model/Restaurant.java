@@ -1,15 +1,14 @@
 package Model;
 
 import java.util.Observable;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class Restaurant extends Observable {
     public boolean VIPClient;
-    public boolean Reservation;
+    public boolean reservacionLibre;
     public boolean client;
     public boolean accEntrar;
     public int numClientes;
-    public String Reservado;
+    public String reservado;
     public int orden;
     public int comida;
     public int peticiones;
@@ -20,28 +19,29 @@ public class Restaurant extends Observable {
 
     public Restaurant(){
         VIPClient=false;
-        Reservation = true;
+        reservacionLibre = true;
         client=false;
         accEntrar=false;
         numClientes=0;
-        Reservado="";
+        reservado ="";
         orden=0;
         comida=0;
         peticiones=0;
         confirmacion=false;
         maxNumClientes = 0;
         mesas = new boolean[5];
-        for(int i=0; i<5; i++) {
+
+        for (int i=0; i<5; i++) {
             mesas[i] = false;
         }
     }
-    public synchronized boolean Reservar(String nombre){
+    public synchronized boolean reservar(String nombre){
         //Para el hilo cliente
         synchronized (this) {
-            if(Reservation){
+            if(reservacionLibre){
                 System.out.println("Reservado por "+nombre);
-                Reservation=false;
-                Reservado=nombre;
+                reservacionLibre =false;
+                reservado = nombre;
                 try {
                     Thread.sleep(1500);
                 } catch (InterruptedException e) {
@@ -49,51 +49,51 @@ public class Restaurant extends Observable {
                 }
                 return true;
             }
-            return false;
+            else {
+                return false;
+            }
         }
     }
 
-    public int Entrar(String nombre){
+    public int entrar(String nombre){
         int numMesa = -1;
-        try {
-            if(Reservado.equals(nombre)){
-                System.out.println("Confirmacion"+nombre);
-                confirmacion=false;
-                numMesa = 4;
-            }else{
-                synchronized (this) {
-                numClientes++;
-                maxNumClientes++;
-                while (maxNumClientes==4) {
-                    wait();
-                }
-                for(int j=0; j<4; j++) {
-                    if(!mesas[j]) {
-                        numMesa = j;
-                        j = 100;
+            try {
+                if(reservado.equals(nombre)){
+                    System.out.println("Cliente reservado "+ nombre);
+                    confirmacion = false;
+                    numMesa = 4;
+                }else{
+                    synchronized (this) {
+                        numClientes++;
+                        maxNumClientes++;
+                        while (maxNumClientes==4) {
+                            wait();
+                        }
+                        accEntrar=true;
+                        client=true;
+                        for (int i=0; i<4; i++) {
+                            if(!mesas[i]) {
+                                numMesa = i;
+                                mesas[i] = true;
+                                i = 100;
+                            }
+                        }
                     }
                 }
-                accEntrar=true;
-                client=true;
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        try {
-            Thread.sleep(ThreadLocalRandom.current().nextInt(5000));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        setChanged();
+        notifyObservers("seat " + numMesa);
         return numMesa;
     }
-    public void Ordenar(){
+    public void ordenar(){
         synchronized (this) {
             orden++;
             notifyAll();
         }
     }
-    public void DarOrden(){
+    public void servirOrden(){
         synchronized (this) {
             while(orden<=0){
                 try {
@@ -107,7 +107,7 @@ public class Restaurant extends Observable {
             notifyAll();
         }
     }
-    public void Cocinar(){
+    public void cocinar(){
         synchronized (this) {
             while (peticiones<=0){
                 try {
@@ -120,7 +120,7 @@ public class Restaurant extends Observable {
             notifyAll();
         }
     }
-    public void comerCliente(){
+    public void comer(){
         synchronized (this) {
             while (comida<=0){
                 try {
@@ -137,25 +137,25 @@ public class Restaurant extends Observable {
             e.printStackTrace();
         }
     }
-    public void salirCliente(){
+    public void salir(int numMesaLibre){
         synchronized (this) {
             if(!confirmacion){
                 confirmacion=true;
-                Reservation=true;
+                reservacionLibre =true;
             }else{
                 numClientes--;
                 maxNumClientes--;
                 client=false;
-                System.out.println(numClientes+" Clientes en cola");
+                System.out.println(numClientes+" Clientes en fila");
             }
+            mesas[numMesaLibre] = false;
             notifyAll();
             contador++;
             setChanged();
-            notifyObservers(contador);
+            notifyObservers("" + contador);
         }
     }
-    public void Recepcion(){
-        //Para el hilo recepcionista
+    public void recepcion(){
         synchronized (this) {
             while(numClientes < 1 || client){
                 try {
