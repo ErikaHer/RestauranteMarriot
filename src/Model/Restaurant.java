@@ -14,6 +14,7 @@ public class Restaurant extends Observable {
     public int peticiones;
     public int contador=0;
     public boolean confirmacion;
+    public int maxNumClientes;
     public Restaurant(){
         VIPClient=false;
         Reservation = true;
@@ -25,6 +26,7 @@ public class Restaurant extends Observable {
         comida=0;
         peticiones=0;
         confirmacion=false;
+        maxNumClientes = 0;
     }
     public synchronized void Reservar(String nombre){
         //Para el hilo cliente
@@ -50,7 +52,8 @@ public class Restaurant extends Observable {
                 }else{
                     synchronized (this) {
                     numClientes++;
-                    while (accEntrar) {
+                    maxNumClientes++;
+                    while (maxNumClientes==5) {
                         wait();
                     }
                     accEntrar=true;
@@ -107,7 +110,7 @@ public class Restaurant extends Observable {
             comida--;
         }
         try {
-            Thread.sleep(3000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -119,6 +122,7 @@ public class Restaurant extends Observable {
                 Reservation=true;
             }else{
                 numClientes--;
+                maxNumClientes--;
                 client=false;
                 System.out.println(numClientes+" Clientes en cola");
             }
