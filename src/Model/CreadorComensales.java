@@ -23,7 +23,7 @@ private Cliente cliente;
             Thread Hcliente = new Thread(cliente);
             Hcliente.setName("Cliente "+(i+1));
             try {
-                Thread.sleep(ThreadLocalRandom.current().nextInt(8000));
+                Thread.sleep(ThreadLocalRandom.current().nextInt(7000));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

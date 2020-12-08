@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -31,6 +33,15 @@ public class Controller implements Observer {
     @FXML
     private Label txtPorcentaje;
 
+    @FXML
+    private Label lblMesero;
+
+    @FXML
+    private Circle chef;
+
+    @FXML
+    private Circle mesero;
+
     private String[] positions;
 
     @FXML
@@ -40,6 +51,8 @@ public class Controller implements Observer {
 
     @FXML
     void IniciarAnimacion(ActionEvent event) {
+        chef.setFill(Color.GREEN);
+        mesero.setFill(Color.GREEN);
         btnIniciar.setDisable(true);
         txtPorcentaje.setText("0 %");
         progressBarTotal.setProgress(0);
@@ -74,10 +87,24 @@ public class Controller implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         synchronized (this) {
+            if (((String)arg).contains("ocupadoMesero")){
+                String[] cadena = ((String) arg).split(" ");
+                int numMesa = Integer.parseInt(cadena[1]);
+                Platform.runLater(()-> lblMesero.setText("Atendiendo: "+(numMesa+1)));
+                mesero.setFill(Color.RED);
+            }else
+            if (((String)arg).contains("libreMesero")){
+                Platform.runLater(()-> lblMesero.setText(""));
+                mesero.setFill(Color.GREEN);
+            }else
+            if (((String)arg).contains("ocupado")){
+                chef.setFill(Color.RED);
+            }else if(((String)arg).contains("libre")){
+                chef.setFill(Color.GREEN);
+            }else
             if(((String)arg).contains("seat")) {
                 String[] cadena = ((String) arg).split(" ");
                 int numMesa = Integer.parseInt(cadena[1]);
-                System.out.println("mesa: " + numMesa);
             }
             else {
                 int dato= Integer.parseInt((String)arg);
@@ -87,8 +114,8 @@ public class Controller implements Observer {
                 int porciento= (int) (valor*100);
                 Platform.runLater(()-> txtPorcentaje.setText(porciento+" %"));
                 if(porciento==100){
-                    alert.setHeaderText("Fin de la animación");
-                    alert.setTitle("Terminación");
+                    alert.setHeaderText("Se atendieron todos los clientes");
+                    alert.setTitle("RESTAURANTE CERRADO");
                     alert.setContentText("Restaurante Marriot");
                     Platform.runLater(()-> {
                         alert.show();

@@ -16,6 +16,7 @@ public class Restaurant extends Observable {
     public boolean confirmacion;
     public int maxNumClientes;
     public boolean[] mesas;
+    public int auxMesa;
 
     public Restaurant(){
         VIPClient=false;
@@ -27,6 +28,7 @@ public class Restaurant extends Observable {
         orden=0;
         comida=0;
         peticiones=0;
+        auxMesa = -1;
         confirmacion=false;
         maxNumClientes = 0;
         mesas = new boolean[5];
@@ -35,6 +37,7 @@ public class Restaurant extends Observable {
             mesas[i] = false;
         }
     }
+
     public synchronized boolean reservar(String nombre){
         //Para el hilo cliente
         synchronized (this) {
@@ -59,9 +62,9 @@ public class Restaurant extends Observable {
         int numMesa = -1;
             try {
                 if(reservado.equals(nombre)){
-                    System.out.println("Cliente reservado "+ nombre);
                     confirmacion = false;
                     numMesa = 4;
+                    auxMesa = 4;
                 }else{
                     synchronized (this) {
                         numClientes++;
@@ -74,6 +77,7 @@ public class Restaurant extends Observable {
                         for (int i=0; i<4; i++) {
                             if(!mesas[i]) {
                                 numMesa = i;
+                                auxMesa = i;
                                 mesas[i] = true;
                                 i = 100;
                             }
@@ -93,31 +97,54 @@ public class Restaurant extends Observable {
             notifyAll();
         }
     }
+
     public void servirOrden(){
+        String txt = "libreMesero";
+        boolean aux = false;
         synchronized (this) {
-            while(orden<=0){
+            if (orden<=0){
+                txt = "libreMesero";
                 try {
                     wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+            }else{
+                aux = true;
+                txt = "ocupadoMesero";
+                peticiones++;
+                orden--;
             }
-            peticiones++;
-            orden--;
             notifyAll();
+            setChanged();
+            notifyObservers(txt +" "+ auxMesa);
+        }
+        if (aux){
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
     public void cocinar(){
+        String txt = "libre";
         synchronized (this) {
-            while (peticiones<=0){
+            if (peticiones<=0){
+                txt = "libre";
                 try {
                     wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+            }else{
+                txt = "ocupado";
+                comida++;
+                peticiones--;
             }
-            comida++;
             notifyAll();
+            setChanged();
+            notifyObservers(txt);
         }
     }
     public void comer(){
