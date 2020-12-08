@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.Observable;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Restaurant extends Observable {
     public boolean VIPClient;
@@ -15,6 +16,8 @@ public class Restaurant extends Observable {
     public int contador=0;
     public boolean confirmacion;
     public int maxNumClientes;
+    public boolean[] mesas;
+
     public Restaurant(){
         VIPClient=false;
         Reservation = true;
@@ -27,8 +30,12 @@ public class Restaurant extends Observable {
         peticiones=0;
         confirmacion=false;
         maxNumClientes = 0;
+        mesas = new boolean[5];
+        for(int i=0; i<5; i++) {
+            mesas[i] = false;
+        }
     }
-    public synchronized void Reservar(String nombre){
+    public synchronized boolean Reservar(String nombre){
         //Para el hilo cliente
         synchronized (this) {
             if(Reservation){
@@ -40,30 +47,45 @@ public class Restaurant extends Observable {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                return true;
             }
+            return false;
         }
     }
 
-    public void Entrar(String nombre){
-            try {
-                if(Reservado.equals(nombre)){
-                    System.out.println("Confirmacion"+nombre);
-                    confirmacion=false;
-                }else{
-                    synchronized (this) {
-                    numClientes++;
-                    maxNumClientes++;
-                    while (maxNumClientes==5) {
-                        wait();
+    public int Entrar(String nombre){
+        int numMesa = -1;
+        try {
+            if(Reservado.equals(nombre)){
+                System.out.println("Confirmacion"+nombre);
+                confirmacion=false;
+                numMesa = 4;
+            }else{
+                synchronized (this) {
+                numClientes++;
+                maxNumClientes++;
+                while (maxNumClientes==4) {
+                    wait();
+                }
+                for(int j=0; j<4; j++) {
+                    if(!mesas[j]) {
+                        numMesa = j;
+                        j = 100;
                     }
-                    accEntrar=true;
-                    client=true;
                 }
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                accEntrar=true;
+                client=true;
             }
-
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        try {
+            Thread.sleep(ThreadLocalRandom.current().nextInt(5000));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return numMesa;
     }
     public void Ordenar(){
         synchronized (this) {

@@ -11,7 +11,7 @@ import java.util.Observable;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Cliente extends Random implements Runnable{
+public class Cliente extends Observable implements Runnable{
     private AnchorPane padre;
     private Restaurant restaurant;
     public Cliente(AnchorPane padre, Restaurant restaurant){
@@ -20,7 +20,30 @@ public class Cliente extends Random implements Runnable{
     }
     @Override
     public void run() {
-        String url="/Imagenes/Cliente"+ThreadLocalRandom.current().nextInt(4)+".png";
+        this.setChanged();
+        this.notifyObservers("new");
+        try {
+            Thread.sleep(ThreadLocalRandom.current().nextInt(1500) + 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        boolean reserva = restaurant.Reservar(Thread.currentThread().getName());
+        String argumento;
+        if(reserva) {
+            argumento = "cR";
+        }
+        else {
+            argumento = "sR";
+        }
+        this.setChanged();
+        this.notifyObservers("access " + argumento);
+        try {
+            Thread.sleep(ThreadLocalRandom.current().nextInt(1500) + 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        /*String url="/Imagenes/Cliente"+ThreadLocalRandom.current().nextInt(4)+".png";
         System.out.println("Inicio de cliente: "+url);
         Button cliente = new Button("");
         cliente.setLayoutX(600);
@@ -36,9 +59,8 @@ public class Cliente extends Random implements Runnable{
                 e.printStackTrace();
             }
             Platform.runLater(()-> cliente.setLayoutY(cliente.getLayoutY()-50));
-        }
-        restaurant.Reservar(Thread.currentThread().getName());
-        for(int i=0;i<8;i++){
+        }*/
+        /*for(int i=0;i<8;i++){
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
@@ -61,20 +83,22 @@ public class Cliente extends Random implements Runnable{
                 e.printStackTrace();
             }
             Platform.runLater(()-> cliente.setLayoutX(cliente.getLayoutX()-50));
-        }
-        restaurant.Entrar(Thread.currentThread().getName());
-        for(int i=0;i<5;i++){
+        }*/
+        int numMesa = restaurant.Entrar(Thread.currentThread().getName());
+        this.setChanged();
+        this.notifyObservers("seat " + numMesa);
+        /*for(int i=0;i<5;i++){
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             Platform.runLater(()-> cliente.setLayoutY(cliente.getLayoutY()-25));
-        }
+        }*/
         restaurant.Ordenar();
         restaurant.comerCliente();
-        restaurant.salirCliente();
-        for(int i=0;i<2;i++){
+        //restaurant.salirCliente();
+        /*for(int i=0;i<2;i++){
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
@@ -98,6 +122,6 @@ public class Cliente extends Random implements Runnable{
             }
             Platform.runLater(()-> cliente.setLayoutY(cliente.getLayoutY()+50));
         }
-        Platform.runLater(()-> cliente.setVisible(false));
+        Platform.runLater(()-> cliente.setVisible(false));*/
     }
 }
