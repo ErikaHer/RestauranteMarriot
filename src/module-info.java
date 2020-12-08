@@ -1,6 +1,6 @@
-module ProyectC3Concurrente {
+module RestauranteMarriot {
+    requires javafx.fxml;
     requires javafx.controls;
-    requires  javafx.fxml;
 
     opens principal;
 }
