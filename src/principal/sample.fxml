@@ -3,84 +3,130 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="503.0" prefWidth="717.0" style="-fx-background-color: #f8e5dc;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="principal.Controller">
+<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="664.0" prefWidth="927.0" style="-fx-background-color: slategray;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="principal.Controller">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c9ced3" height="511.0" layoutY="-4.0" stroke="BLACK" strokeType="INSIDE" width="466.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c59643" height="414.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="372.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="383.0" layoutX="18.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="19.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="295.0" layoutX="340.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="19.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="26.0" layoutX="18.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="342.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="10.0" layoutX="83.0" layoutY="103.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="276.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bfbd56" height="32.0" layoutX="77.0" layoutY="212.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="12.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a41010" height="32.0" layoutX="50.0" layoutY="190.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="67.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bfbd56" height="32.0" layoutX="248.0" layoutY="217.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="12.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e7e24b" height="32.0" layoutX="221.0" layoutY="195.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="67.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="10.0" layoutX="19.0" layoutY="392.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="285.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="10.0" layoutX="34.0" layoutY="304.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="324.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5c5a" height="10.0" layoutX="127.0" layoutY="304.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="94.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="38.0" layoutX="127.0" layoutY="354.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="12.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c9ced3" height="511.0" layoutX="592.0" layoutY="-6.0" stroke="BLACK" strokeType="INSIDE" width="129.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3c3e40" height="511.0" layoutX="465.0" layoutY="-4.0" stroke="BLACK" strokeType="INSIDE" width="146.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#919400" height="97.0" layoutX="522.0" layoutY="392.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#919400" height="97.0" layoutX="522.0" layoutY="266.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#919400" height="97.0" layoutX="522.0" layoutY="125.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="80.0" layoutX="477.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="12.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="80.0" layoutX="504.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="12.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="80.0" layoutX="532.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="12.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="80.0" layoutX="560.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="12.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="80.0" layoutX="586.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="12.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#908e8e" height="10.0" layoutX="465.0" layoutY="94.0" stroke="BLACK" strokeType="INSIDE" width="146.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8a8989" height="10.0" layoutX="464.0" layoutY="6.0" stroke="BLACK" strokeType="INSIDE" width="146.0" />
-      <Line endX="-109.0" endY="66.0" layoutX="190.0" layoutY="440.0" startX="-109.0" startY="-26.0" />
-      <Line endX="-109.0" endY="66.0" layoutX="280.0" layoutY="440.0" startX="-109.0" startY="-26.0" />
-      <Line endX="-109.0" endY="66.0" layoutX="380.0" layoutY="440.0" startX="-109.0" startY="-26.0" />
-      <Line endX="-109.0" endY="66.0" layoutX="480.0" layoutY="440.0" startX="-109.0" startY="-26.0" />
-      <Line endX="-39.0" endY="-37.5" layoutX="505.0" layoutY="449.0" startX="-131.0" startY="-37.5" />
-      <Line endX="-39.0" endY="-37.5" layoutX="505.0" layoutY="359.0" startX="-131.0" startY="-37.5" />
-      <Line endX="-39.0" endY="-37.5" layoutX="505.0" layoutY="259.0" startX="-131.0" startY="-37.5" />
-      <Line endX="-39.0" endY="-37.5" layoutX="505.0" layoutY="159.0" startX="-131.0" startY="-37.5" />
-      <Line endX="-39.0" endY="-37.5" layoutX="505.0" layoutY="59.0" startX="-131.0" startY="-37.5" />
-      <Line endX="-22.0" endY="-37.5" layoutX="743.0" layoutY="450.0" startX="-131.0" startY="-37.5" />
-      <Line endX="-22.0" endY="-37.5" layoutX="743.0" layoutY="350.0" startX="-131.0" startY="-37.5" />
-      <Line endX="-22.0" endY="-37.5" layoutX="743.0" layoutY="250.0" startX="-131.0" startY="-37.5" />
-      <Line endX="-22.0" endY="-37.5" layoutX="743.0" layoutY="150.0" startX="-131.0" startY="-37.5" />
-      <Line endX="-22.0" endY="-37.5" layoutX="743.0" layoutY="60.0" startX="-131.0" startY="-37.5" />
-      <ImageView fitHeight="93.0" fitWidth="67.0" layoutX="664.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Imagenes/telefono.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="67.0" fitWidth="61.0" layoutX="218.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Imagenes/Cosinero.jpg" />
-         </image>
-      </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#878f97" height="52.0" layoutX="298.0" layoutY="46.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
-      <Circle fill="#f20b0b" layoutX="317.0" layoutY="60.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="#f20b0b" layoutX="317.0" layoutY="84.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-      <ImageView fitHeight="80.0" fitWidth="82.0" layoutX="44.0" layoutY="313.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Imagenes/Recepcionista.jpg" />
-         </image>
-      </ImageView>
-      <Button layoutX="-52.0" layoutY="27.0" mnemonicParsing="false" text="Button" />
-      <Button fx:id="btnIniciar" layoutX="20.0" layoutY="428.0" mnemonicParsing="false" onAction="#IniciarAnimacion" style="-fx-background-color: green; -fx-background-radius: 30;" text="Iniciar" textFill="WHITE" />
-      <Button fx:id="BtnSalir" layoutX="19.0" layoutY="460.0" mnemonicParsing="false" onAction="#Finalizar" style="-fx-background-color: red; -fx-background-radius: 30;" text="  salir  " textFill="WHITE" />
-      <Label layoutX="52.0" layoutY="198.0" text="VIP" textFill="WHITE" />
-      <ProgressBar fx:id="progressBarTotal" layoutX="81.0" layoutY="464.0" prefHeight="18.0" prefWidth="291.0" progress="0.0" />
-      <Label layoutX="125.0" layoutY="445.0" text="Clientes atendidos">
+      <Button fx:id="btnIniciar" layoutX="43.0" layoutY="603.0" mnemonicParsing="false" onAction="#IniciarAnimacion" style="-fx-background-color: yellowgreen; -fx-background-radius: 30;" text="Iniciar" textFill="WHITE" />
+      <Button fx:id="BtnSalir" layoutX="798.0" layoutY="603.0" mnemonicParsing="false" onAction="#Finalizar" style="-fx-background-color: red; -fx-background-radius: 30;" text="Terminar" textFill="WHITE" />
+      <ProgressBar fx:id="progressBarTotal" layoutX="318.0" layoutY="618.0" prefHeight="18.0" prefWidth="291.0" progress="0.0" />
+      <Label layoutX="319.0" layoutY="587.0" text="Clientes atendidos" textFill="WHITE">
          <font>
-            <Font name="Arial" size="12.0" />
+            <Font name="Dosis ExtraLight" size="23.0" />
          </font>
       </Label>
-      <Label fx:id="txtPorcentaje" layoutX="350.0" layoutY="481.0" text="0 %" />
+      <Label fx:id="txtPorcentaje" layoutX="616.0" layoutY="614.0" text="0 %" textFill="WHITE">
+         <font>
+            <Font name="Dosis ExtraLight" size="23.0" />
+         </font></Label>
+      <Rectangle fx:id="table1" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="100.0" layoutX="533.0" layoutY="243.0" stroke="#ffffff00" strokeType="INSIDE" width="100.0" />
+      <Rectangle fx:id="table4" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="100.0" layoutX="533.0" layoutY="430.0" stroke="#ffffff00" strokeType="INSIDE" width="100.0" />
+      <Rectangle fx:id="table2" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="100.0" layoutX="533.0" layoutY="65.0" stroke="#ffffff00" strokeType="INSIDE" width="100.0" />
+      <Rectangle fx:id="table5" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="100.0" layoutX="781.0" layoutY="430.0" stroke="#ffffff00" strokeType="INSIDE" width="100.0" />
+      <Rectangle fx:id="table3" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="100.0" layoutX="781.0" layoutY="65.0" stroke="#ffffff00" strokeType="INSIDE" width="100.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8fa18d" height="200.0" layoutX="796.0" layoutY="201.0" stroke="TRANSPARENT" strokeType="INSIDE" width="35.0" />
+      <Text fill="WHITE" layoutX="808.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="COCINA" textAlignment="CENTER" wrappingWidth="6.64404296875" />
+      <Circle fx:id="chef" fill="#b2b2b2" layoutX="860.0" layoutY="301.0" radius="15.0" stroke="#ffffff00" strokeType="INSIDE" />
+      <Text fill="WHITE" layoutX="576.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1">
+         <font>
+            <Font name="Dosis Light" size="60.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="817.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2">
+         <font>
+            <Font name="Dosis Light" size="60.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="569.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3">
+         <font>
+            <Font name="Dosis Light" size="60.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="570.0" layoutY="503.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4">
+         <font>
+            <Font name="Dosis Light" size="60.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="817.0" layoutY="503.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+         <font>
+            <Font name="Dosis Light" size="60.0" />
+         </font>
+      </Text>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="131.0" layoutX="765.0" layoutY="414.0" stroke="#ffffff75" strokeType="INSIDE" strokeWidth="2.0" style="-fx-stroke-dash-array: 2 12 12 2;" width="131.0" />
+      <Text fill="WHITE" layoutX="776.0" layoutY="571.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Área Reservada">
+         <font>
+            <Font name="Dosis ExtraLight" size="19.0" />
+         </font>
+      </Text>
+      <Label layoutX="310.0" layoutY="14.0" text="Restaurante Marriot" textFill="WHITE">
+         <font>
+            <Font name="Dosis ExtraLight" size="39.0" />
+         </font>
+      </Label>
+      <Line endX="100.0" layoutX="139.0" layoutY="40.0" startX="-100.0" stroke="#ffffff76" />
+      <Line endX="100.0" layoutX="787.0" layoutY="40.0" startX="-100.0" stroke="#ffffff76" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#abbbc9" height="180.0" layoutX="420.0" layoutY="65.0" stroke="TRANSPARENT" strokeType="INSIDE" width="35.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#abbbc9" height="180.0" layoutX="420.0" layoutY="392.0" stroke="TRANSPARENT" strokeType="INSIDE" width="35.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a4988e" height="200.0" layoutX="312.0" layoutY="238.0" stroke="TRANSPARENT" strokeType="INSIDE" width="35.0" />
+      <Text fill="WHITE" layoutX="323.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RECEPCIÓN" textAlignment="CENTER" wrappingWidth="6.64404296875" />
+      <Circle fx:id="client" fill="#b0b0b0" layoutX="280.0" layoutY="339.0" radius="15.0" stroke="#ae747400" strokeType="INSIDE" />
+      <Rectangle fx:id="colorFree" arcHeight="5.0" arcWidth="5.0" fill="#b0b0b0" height="21.0" layoutX="181.0" layoutY="92.0" stroke="#ffffff00" strokeType="INSIDE" width="26.0" />
+      <Rectangle fx:id="colorBusy" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="21.0" layoutX="181.0" layoutY="123.0" stroke="#ffffff00" strokeType="INSIDE" width="26.0" />
+      <Rectangle fx:id="colorOrdering" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="21.0" layoutX="181.0" layoutY="154.0" stroke="#ffffff00" strokeType="INSIDE" width="26.0" />
+      <Rectangle fx:id="colorEating" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="21.0" layoutX="181.0" layoutY="184.0" stroke="#ffffff00" strokeType="INSIDE" width="26.0" />
+      <Text fill="WHITE" layoutX="216.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Libre">
+         <font>
+            <Font name="Dosis ExtraLight" size="19.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="216.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ocupado">
+         <font>
+            <Font name="Dosis ExtraLight" size="19.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="215.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ordenando">
+         <font>
+            <Font name="Dosis ExtraLight" size="19.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="215.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Comiendo">
+         <font>
+            <Font name="Dosis ExtraLight" size="19.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="181.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estado de la Mesa">
+         <font>
+            <Font name="Dosis ExtraLight" size="19.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="175.0" layoutY="504.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo de Cliente">
+         <font>
+            <Font name="Dosis ExtraLight" size="19.0" />
+         </font>
+      </Text>
+      <Rectangle fx:id="colorWithReser" arcHeight="5.0" arcWidth="5.0" fill="#b48cb3" height="21.0" layoutX="175.0" layoutY="521.0" stroke="#ffffff00" strokeType="INSIDE" width="26.0" />
+      <Rectangle fx:id="colorWithOutReser" arcHeight="5.0" arcWidth="5.0" fill="#b48c8c" height="21.0" layoutX="175.0" layoutY="552.0" stroke="#b48c8c00" strokeType="INSIDE" width="26.0" />
+      <Text fill="WHITE" layoutX="206.0" layoutY="540.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Con reservación">
+         <font>
+            <Font name="Dosis ExtraLight" size="19.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="206.0" layoutY="571.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sin reservación">
+         <font>
+            <Font name="Dosis ExtraLight" size="19.0" />
+         </font>
+      </Text>
+      <Line endX="500.0" layoutX="-103.0" layoutY="324.0" rotate="90.0" stroke="#ffffff75" />
+      <Text fill="WHITE" layoutX="46.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clientes">
+         <font>
+            <Font name="Dosis ExtraLight" size="19.0" />
+         </font>
+      </Text>
+      <Circle fx:id="mesero" fill="#b0b0b0" layoutX="710.0" layoutY="301.0" radius="15.0" stroke="#ae747400" strokeType="INSIDE" />
    </children>
 </AnchorPane>
