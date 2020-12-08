@@ -43,6 +43,7 @@ public class Cliente implements Runnable{
         else {
             Platform.runLater(()-> cliente.setFill(Color.rgb(180, 140, 140)));
         }
+
         //Entrar
         int numMesa = restaurant.entrar(Thread.currentThread().getName());
         String[] layout = positions[numMesa].split(" ");
@@ -50,13 +51,29 @@ public class Cliente implements Runnable{
             cliente.setLayoutX(Integer.parseInt(layout[0]));
             cliente.setLayoutY(Integer.parseInt(layout[1])+50);
         });
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         //Ordenar
+        Platform.runLater(()-> cliente.setFill(Color.BLUE));
         restaurant.ordenar();
 
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         //Comer
+        Platform.runLater(()-> cliente.setFill(Color.YELLOW));
         restaurant.comer();
 
         //Salir
+        Platform.runLater(()-> cliente.setFill(Color.rgb(180, 140, 140)));
         restaurant.salir(numMesa);
         if(numMesa == 0 || numMesa == 2 || numMesa == 3 ) {
             switch (numMesa) {

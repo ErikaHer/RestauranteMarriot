@@ -12,10 +12,9 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("The restaurant very vergoline");
+        primaryStage.setTitle("Restaurante Marriot");
 
         primaryStage.setScene(new Scene(root));
-        primaryStage.getIcons().add(new Image("/imagenes/restaurant.png"));
         primaryStage.show();
     }
 
